@@ -109,6 +109,17 @@
 
   </div>
 
+   <div id='VideoLink'>
+<br>
+
+## Screencastify video link
+
+Click below for the video:
+
+<a href= "https://drive.google.com/file/d/148_TX1_-On5tWOuPlMerwqgd1WZUJdTq/view">walkthrough video </a>
+
+   </div>
+
 
 
   
