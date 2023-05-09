@@ -120,7 +120,7 @@ inquirer
                 },
                 {
                     type: "input",
-                    message: "enter manager",
+                    message: "enter manager id",
                     name: "addManager",
                 }
                 ])
