@@ -12,15 +12,15 @@ app.use(express.json());
 
 // Connect to database
 const db = mysql.createConnection(
-  {
+    {
     host: 'localhost',
     // MySQL username,
     user: 'root',
     // TODO: Add MySQL password here
     password: 'AndyBC2023',
     database: 'WORK_CMS'
-  },
-  console.log(`Connected to the WORK_CMS database.`)
+    },
+    console.log(`Connected to the WORK_CMS database.`)
 );
 
 
@@ -33,7 +33,7 @@ inquirer
         message: "view departments, view roles, view employees, add department, add role, add employee, update employee role",
         name: "SelectQuery",
         }
-       
+    
     ])
     .then(function (response) {
         if(response.SelectQuery == "view departments"){
@@ -67,9 +67,9 @@ inquirer
                 db.promise().query(`INSERT INTO department (department_name) VALUES (?);`,response.addDept)
                 )
                 .then( ([rows,fields]) => {
-                  console.log(rows);
-                  console.log("Entry Added ");
-                  return selectedOption()
+                    console.log(rows);
+                    console.log("Entry Added ");
+                    return selectedOption()
                 })
                 
         }else if(response.SelectQuery == "add role"){
@@ -95,9 +95,9 @@ inquirer
                 db.promise().query(`INSERT INTO role (title, salary, department_id) VALUES (?,?,?);`,[response.addName,response.addSalary,response.addDept])
                 )
                 .then( ([rows,fields]) => {
-                  console.log(rows);
-                  console.log("Entry Added ");
-                  return selectedOption()
+                    console.log(rows);
+                    console.log("Entry Added ");
+                    return selectedOption()
                 })
                 
         }else if(response.SelectQuery == "add employee"){
@@ -129,9 +129,9 @@ inquirer
 
                 )
                 .then( ([rows,fields]) => {
-                  console.log(rows);
-                  console.log("Entry Added ");
-                  return selectedOption()
+                    console.log(rows);
+                    console.log("Entry Added ");
+                    return selectedOption()
                 })
                 
         }else if(response.SelectQuery == "update employee role"){
@@ -153,9 +153,9 @@ inquirer
                 db.promise().query(`UPDATE employee SET role_id = ? WHERE id = ? ;`,[response.addRole,response.Update])
                 )
                 .then( ([rows,fields]) => {
-                  console.log(rows);
-                  console.log("Role Updated ");
-                  return selectedOption()
+                    console.log(rows);
+                    console.log("Role Updated ");
+                    return selectedOption()
                 })
                 
         }
