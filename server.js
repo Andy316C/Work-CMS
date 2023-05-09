@@ -30,7 +30,7 @@ inquirer
     .prompt([
         {
         type: "input",
-        message: "view departments, view roles, view employees, add department, add role, add employee, update employee role",
+        message: "view departments, view roles, view employees, add department, add role, add employee, update employee role: ",
         name: "SelectQuery",
         }
     
