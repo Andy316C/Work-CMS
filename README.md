@@ -7,7 +7,7 @@
   <div id='desc'>
 
   ## Description
-  This Application allows you turn view your business's departments , employees and roles from you business database. select the option you would like to implement and the command will be executed on your request
+  This Application allows you to view your business database, to view specific information like departments , employees and roles. Select the option you would like to implement and the command will be executed on your request.
   </div>
   <br>
 
