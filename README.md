@@ -66,7 +66,7 @@
    <div id='images'>
 
   ## Images
-  Starting point, this is the first input query you will be asked
+  Starting point, this is the first input query you will be asked. a message will appear if you successfully connected to the database. "Connected to WORK_CMS database"
   <img src= './images/startApp.png'>
   <br>
 
@@ -74,7 +74,7 @@
   <img src= './images/viewDept.png'>
   <br>
   
-  Updating requests, will return the success data
+  Updating requests, will return the success data. and will return a "Entry Added" if the entry was successfull
   <img src= './images/updateEmployee.png'>
   <br>
   
