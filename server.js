@@ -17,7 +17,7 @@ const db = mysql.createConnection(
     // MySQL username,
     user: 'root',
     // TODO: Add MySQL password here
-    password: 'AndyBC2023',
+    password: '', // REMOVED PASSWORD AFTER I COMPLETED MY VIDEO WALKTHROUGH AND SUBMITTED ASSIGNMENT
     database: 'WORK_CMS'
     },
     console.log(`Connected to the WORK_CMS database.`)
