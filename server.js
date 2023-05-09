@@ -30,23 +30,23 @@ inquirer
     .prompt([
         {
         type: "input",
-        message: "1: View all departments, 2: View all roles, 3: View all employees, 4: add a department, 5: Add a role, 6: Add an employee, 7: Update employee role",
+        message: "view departments, view roles, view employees, add department, add role, add employee, update employee role",
         name: "SelectQuery",
         }
        
     ])
     .then(function (response) {
-        if(response.SelectQuery == 1){
+        if(response.SelectQuery == "view departments"){
             db.query('select * from department', function (err, results) {
                 console.log(results);
                 return selectedOption();
             });
-        }else if(response.SelectQuery == 2){
+        }else if(response.SelectQuery == "view roles"){
             db.query('SELECT role.id , role.title, department.department_name,role.salary  FROM role JOIN department ON department.id = role.id;', function (err, results) {
                 console.log(results);
                 return selectedOption();
             });
-        }else if(response.SelectQuery == 3){
+        }else if(response.SelectQuery == "view employees"){
             db.query(`
             SELECT employee.id , employee.first_name, employee.last_name,role.title, department.department_name, role.salary 
             FROM role JOIN department ON department.id = role.id JOIN employee ON employee.role_id = role.id;
@@ -54,7 +54,7 @@ inquirer
                 console.log(results);
                 return selectedOption();
             });
-        }else if(response.SelectQuery == 4){
+        }else if(response.SelectQuery == "add department"){
             inquirer
                 .prompt([
                 {
@@ -68,11 +68,11 @@ inquirer
                 )
                 .then( ([rows,fields]) => {
                   console.log(rows);
-                  console.log("Entry Added ")
+                  console.log("Entry Added ");
                   return selectedOption()
                 })
                 
-        }else if(response.SelectQuery == 5){
+        }else if(response.SelectQuery == "add role"){
             inquirer
                 .prompt([
                 {
@@ -87,7 +87,7 @@ inquirer
                 },
                 {
                     type: "input",
-                    message: "enter name of department",
+                    message: "enter department id",
                     name: "addDept",
                 }
                 ])
@@ -96,35 +96,65 @@ inquirer
                 )
                 .then( ([rows,fields]) => {
                   console.log(rows);
-                  console.log("Entry Added ")
+                  console.log("Entry Added ");
                   return selectedOption()
                 })
                 
-        }else if(response.SelectQuery == 6){
+        }else if(response.SelectQuery == "add employee"){
             inquirer
                 .prompt([
                 {
                     type: "input",
-                    message: "enter name of employee",
-                    name: "addName",
+                    message: "enter first name",
+                    name: "firstName",
                 },
                 {
                     type: "input",
-                    message: "enter salary",
-                    name: "addSalary",
+                    message: "enter last name",
+                    name: "lastName",
                 },
                 {
                     type: "input",
-                    message: "enter name of department",
-                    name: "addDept",
+                    message: "enter role id",
+                    name: "addRole",
+                },
+                {
+                    type: "input",
+                    message: "enter manager",
+                    name: "addManager",
                 }
                 ])
                 .then((response) =>
-                db.promise().query(`INSERT INTO department (department_name) VALUES (?);`,response.addDept)
+                db.promise().query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?);`,[response.firstName,response.lastName,response.addRole,response.addManager.length || null])
+
                 )
                 .then( ([rows,fields]) => {
                   console.log(rows);
-                  console.log("Entry Added ")
+                  console.log("Entry Added ");
+                  return selectedOption()
+                })
+                
+        }else if(response.SelectQuery == "update employee role"){
+            inquirer
+                .prompt([
+                {
+                        type: "input",
+                        message: "enter employee id to update role",
+                        name: "Update",
+                },
+                {
+                    type: "input",
+                    message: "enter new role id of employee",
+                    name: "addRole",
+                },
+                
+                ])
+                .then((response) =>
+                db.promise().query(`UPDATE employee SET role_id = ? WHERE id = ? ;`,[response.addRole,response.Update])
+                )
+                .then( ([rows,fields]) => {
+                  console.log(rows);
+                  console.log("Role Updated ");
                   return selectedOption()
                 })
                 
@@ -144,7 +174,9 @@ selectedOption()
 
 WHEN I choose to add a role
 THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
+
 WHEN I choose to add an employee
 THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+
 WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database*/
